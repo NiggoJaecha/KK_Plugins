@@ -245,8 +245,6 @@ namespace KK_Plugins
         }
 
 #if KK || KKS
-
-
         private static void CopySlidersToCoordinate(int coordinateIndex, bool copyBasic, bool copyAdvanced)
         {
             if (_pushUpController.CurrentCoordinateIndex == coordinateIndex) return;
