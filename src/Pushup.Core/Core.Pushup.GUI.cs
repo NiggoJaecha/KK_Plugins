@@ -245,6 +245,8 @@ namespace KK_Plugins
         }
 
 #if KK || KKS
+
+
         private static void CopySlidersToCoordinate(int coordinateIndex, bool copyBasic, bool copyAdvanced)
         {
             if (_pushUpController.CurrentCoordinateIndex == coordinateIndex) return;
@@ -368,6 +370,27 @@ namespace KK_Plugins
         {
             GameObject uiRoot = GameObject.Find("StudioScene/Canvas Main Menu/02_Manipulate/00_Chara/01_State/Viewport/Content");
             if (uiRoot == null) return;
+
+            // copy base body setup to sliders
+            if (value)
+            { 
+                foreach(var controller in StudioAPI.GetSelectedControllers<PushupController>())
+                {
+                    ClothData data = studioEditBra ? controller.CurrentBraData : controller.CurrentTopData;
+                    data.Softness = controller.BaseData.Softness;
+                    data.Weight = controller.BaseData.Weight;
+                    data.Size = controller.BaseData.Size;
+                    data.VerticalPosition = controller.BaseData.VerticalPosition;
+                    data.HorizontalAngle = controller.BaseData.HorizontalAngle;
+                    data.HorizontalPosition = controller.BaseData.HorizontalPosition;
+                    data.VerticalAngle = controller.BaseData.VerticalAngle;
+                    data.Depth = controller.BaseData.Depth;
+                    data.Roundness = controller.BaseData.Roundness;
+                    data.AreolaDepth = controller.BaseData.AreolaDepth;
+                    data.NippleWidth = controller.BaseData.NippleWidth;
+                    data.NippleDepth = controller.BaseData.NippleDepth;
+                }
+            }
 
             GameObject c = uiRoot.transform.Find("Edit Pushup Advanced_Items_SAPI").gameObject;
             GameObject ch = uiRoot.transform.Find("Edit Pushup Advanced_Header_SAPI").gameObject;
